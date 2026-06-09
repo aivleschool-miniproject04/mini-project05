@@ -89,4 +89,11 @@ public class BookService {
     public List<Book> searchByTitleAndAuthor(String title, String author) {
         return bookRepository.findByTitleAndAuthor(title, author);
     }
+
+    @Transactional
+    public Book updateCoverImage(Long id, String coverImageUrl){
+        Book book = findById(id);
+        book.setCoverImageUrl(coverImageUrl);
+        return bookRepository.save(book);
+    }
 }
