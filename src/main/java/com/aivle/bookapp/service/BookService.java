@@ -112,13 +112,25 @@ public class BookService {
         }
         Book book = findById(id);
         book.setCoverImageUrl(coverImageUrl);
-        book.existing.setUpdatedAt(now());
+        book.setUpdatedAt(now());
         return bookRepository.save(book);
     }
     private String now() {
         return LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
+    // 최신 도서 3개
+    @Transactional(readOnly = true)
+    public List<Book> searchNew(){
+        return bookRepository.findTop3ByOrderByCreatedAtDesc();
+    }
+
+    // 인기 도서 3개
+    @Transactional(readOnly = true)
+    public List<Book> searchPopular(){
+        return bookRepository.findTop3ByOrderByLikeCountDesc();
+    }
+  
     @Transactional(readOnly = true)
     public List<Book> searchByTitle(String title) {
         return bookRepository.findByTitleContaining(title);

@@ -39,6 +39,18 @@ public class BookController {
         return bookService.findById(id);
     }
 
+    // 신규 도서 3개
+    @GetMapping("/new")
+    public List<Book> getNewBooks(){
+        return bookService.searchNew();
+    }
+
+    // 인기 도서 3개
+    @GetMapping("/popular")
+    public List<Book> getPopularBooks(){
+        return bookService.searchPopular();
+    }
+
     // 교안 p.162: POST /books - 신규 생성 (201 Created)
     @PostMapping
     public ResponseEntity<Book> createBook(@Valid @RequestBody Book book) {

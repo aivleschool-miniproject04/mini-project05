@@ -15,6 +15,12 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     // 교안 p.129: Containing - 부분 일치 검색
     List<Book> findByTitleContaining(String keyword);
 
+    // 최신 도서 3개 쿼리
+    List<Book> findTop3ByOrderByCreatedAtDesc();
+
+    // 인기 도서 3개 쿼리
+    List<Book> findTop3ByOrderByLikeCountDesc();
+
     // 저자별 검색
     List<Book> findByAuthorContaining(String author);
 
