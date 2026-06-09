@@ -1,6 +1,7 @@
 package com.aivle.bookapp.controller;
 
 import com.aivle.bookapp.domain.Book;
+import com.aivle.bookapp.dto.request.CoverImageRequest;
 import com.aivle.bookapp.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -73,5 +74,9 @@ public class BookController {
             return bookService.searchByTitleAndAuthor(title, author);
         }
         return bookService.search(keyword != null ? keyword : "");
+    }
+    @PatchMapping("/books/{id}/cover")
+    public Book updateCoverImage(@PathVariable Long id, @RequestBody CoverImageRequest request){
+        return bookService.updateCoverImage(id, request.getCoverImageUrl());
     }
 }

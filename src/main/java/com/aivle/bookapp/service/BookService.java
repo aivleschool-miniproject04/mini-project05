@@ -83,18 +83,6 @@ public class BookService {
         return bookRepository.save(existing);
     }
 
-    // 교안 p.57: AI 표지 생성 결과(Data URL)를 도서 정보에 저장
-    @Transactional
-    public Book updateCoverImage(Long id, String coverImageUrl) {
-        if (coverImageUrl == null || coverImageUrl.isBlank()) {
-            throw new IllegalArgumentException("coverImageUrl is required");
-        }
-        Book existing = findById(id);
-        existing.setCoverImageUrl(coverImageUrl);
-        existing.setUpdatedAt(now());
-        return bookRepository.save(existing);
-    }
-
     // 교안 p.167: DELETE 삭제 비즈니스 로직
     @Transactional
     public void delete(Long id) {
@@ -116,6 +104,17 @@ public class BookService {
         return bookRepository.findByTitleAndAuthor(title, author);
     }
 
+    // 교안 p.57: AI 표지 생성 결과(Data URL)를 도서 정보에 저장
+    @Transactional
+    public Book updateCoverImage(Long id, String coverImageUrl){
+        if (coverImageUrl == null || coverImageUrl.isBlank()) {
+            throw new IllegalArgumentException("coverImageUrl is required");
+        }
+        Book book = findById(id);
+        book.setCoverImageUrl(coverImageUrl);
+        book.existing.setUpdatedAt(now());
+        return bookRepository.save(book);
+    }
     private String now() {
         return LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
