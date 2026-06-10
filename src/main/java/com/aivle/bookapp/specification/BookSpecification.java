@@ -18,7 +18,7 @@ public class BookSpecification {
             String pattern = likePattern.toLowerCase();
 
             switch (searchType){
-                case "title", "author", "pulisher", "content", "tags" :
+                case "title", "author", "publisher", "content", "tags" :
                     return cb.like(cb.lower(root.get(searchType)), pattern);
                 default:
                     //searchType == "all"
