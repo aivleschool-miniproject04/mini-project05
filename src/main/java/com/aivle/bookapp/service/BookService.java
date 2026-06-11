@@ -241,7 +241,7 @@ public class BookService {
     }
 
     @Transactional
-    public Book like(Long bookId, String userId, String loginUserId) {
+    public Book like(Long bookId, String loginUserId) {
         Book book = findById(bookId);
 
         User user = userRepository.findByUserId(loginUserId)

@@ -141,9 +141,8 @@ public class BookController {
     @PostMapping("/{id}/like")
     public BookResponse like(
             @PathVariable Long id,
-            @RequestBody LikeRequest request,
             @AuthenticationPrincipal String loginUserId
     ) {
-        return BookResponse.from(bookService.like(id, request.getUserId(), loginUserId));
+        return BookResponse.from(bookService.like(id, loginUserId));
     }
 }
