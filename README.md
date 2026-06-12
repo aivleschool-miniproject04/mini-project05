@@ -155,7 +155,7 @@ spring:
 
 jwt:
   secret: aivle-bookapp-jwt-secret-key-2026!
-  access-expiration: 10800000    # 3시간 (밀리초)
+  access-expiration: 10800000    # 1시간 (밀리초)
   refresh-expiration: 86400000   # 24시간 (밀리초)
 ```
 
