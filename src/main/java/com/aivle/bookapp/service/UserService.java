@@ -163,4 +163,18 @@ public class UserService {
 
         return UserProfileResponse.from(user, newAccessToken, newRefreshToken);
     }
+
+    /**
+     * 사용자의 로그아웃을 처리합니다.
+     * 데이터베이스에 저장된 사용자의 Refresh Token 정보를 삭제(null 처리)합니다.
+     *
+     * @param userId 로그아웃을 진행할 사용자의 ID
+     * @throws UserNotFoundException 사용자를 찾을 수 없는 경우 예외 발생
+     */
+    @Transactional
+    public void logout(String userId) {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        user.setRefreshToken(null);
+    }
 }

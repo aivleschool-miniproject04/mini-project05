@@ -74,4 +74,17 @@ public class UserController {
         UserProfileResponse res = userService.updateProfile(loginUserId, request);
         return ResponseEntity.ok(res);
     }
+
+    /**
+     * 사용자의 로그아웃을 처리합니다.
+     * 데이터베이스에 저장된 사용자의 Refresh Token을 삭제합니다.
+     *
+     * @param loginUserId Spring Security 인증 객체로부터 추출한 현재 로그인 중인 사용자의 ID
+     * @return 200 OK
+     */
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@AuthenticationPrincipal String loginUserId) {
+        userService.logout(loginUserId);
+        return ResponseEntity.ok().build();
+    }
 }
